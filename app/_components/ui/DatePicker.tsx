@@ -6,8 +6,8 @@ import { ptBR } from "date-fns/locale";
 
 import { cn } from "@/app/_lib/utils";
 import { Button } from "./Button";
-import { Calendar } from "./calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "./popover";
+import { Calendar } from "./Calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "./Popover";
 import { SelectSingleEventHandler } from "react-day-picker";
 
 interface DatePickerProps {
