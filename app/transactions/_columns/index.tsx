@@ -8,7 +8,8 @@ import {
   TRANSACTION_PAYMENT_METHOD_LABELS,
 } from "@/app/_constants/transactions";
 import { Button } from "@/app/_components/ui/Button";
-import { PencilIcon, TrashIcon } from "lucide-react";
+import { TrashIcon } from "lucide-react";
+import EditTransactionButton from "@/app/_components/custom/EditTransactionButton";
 
 export const transationColumns: ColumnDef<Transaction>[] = [
   {
@@ -56,12 +57,10 @@ export const transationColumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: "actions",
     header: "Ações",
-    cell: (/* { row: { original: transaction } } */) => {
+    cell: ({ row: { original: transaction } }) => {
       return (
         <div className="space-x-1">
-          <Button variant="ghost" size="icon" className="text-muted-foreground">
-            <PencilIcon />
-          </Button>
+          <EditTransactionButton transaction={transaction} />
           <Button variant="ghost" size="icon" className="text-muted-foreground">
             <TrashIcon />
           </Button>
