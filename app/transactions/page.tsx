@@ -12,7 +12,10 @@ const TransactionPage = async () => {
         <h1 className="text-2xl font-bold">Transactions</h1>
         <AddTransactionButton />
       </div>
-      <DataTable columns={transationColumns} data={transactions} />
+      <DataTable
+        columns={transationColumns}
+        data={JSON.parse(JSON.stringify(transactions))}
+      />
     </div>
   );
 };
