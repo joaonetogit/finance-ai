@@ -42,7 +42,7 @@ import {
   TRANSACTION_TYPE_OPTIONS,
 } from "@/app/_constants/transactions";
 import { DatePicker } from "../ui/DatePicker";
-import { upsertTransaction } from "@/app/_actions/upsert-transaction";
+import { UpsertTransaction } from "@/app/_actions/UpsertTransaction";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, {
@@ -98,7 +98,7 @@ const UpsertTransactionDialog = ({
 
   const onSubmit = async (values: FormSchema) => {
     try {
-      await upsertTransaction({ ...values, id: transactionId });
+      await UpsertTransaction({ ...values, id: transactionId });
       setIsOpen(false);
       form.reset();
     } catch (error) {

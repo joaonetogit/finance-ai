@@ -3,7 +3,7 @@
 import { db } from "@/app/_lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { Prisma } from "@prisma/client";
-import { upsertTransactionSchema } from "./schema";
+import { UpsertTransactionSchema } from "./schema";
 import { revalidatePath } from "next/cache";
 
 interface UpsertTransactionParams
@@ -11,8 +11,8 @@ interface UpsertTransactionParams
   id?: string;
 }
 
-export const upsertTransaction = async (params: UpsertTransactionParams) => {
-  upsertTransactionSchema.parse(params);
+export const UpsertTransaction = async (params: UpsertTransactionParams) => {
+  UpsertTransactionSchema.parse(params);
   const { userId } = await auth();
 
   if (!userId) {
