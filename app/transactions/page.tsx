@@ -2,7 +2,7 @@ import { db } from "../_lib/prisma";
 import { DataTable } from "../_components/ui/DataTable";
 import { transationColumns } from "./_columns";
 import AddTransactionButton from "../_components/custom/AddTransactionButton";
-import Navbar from "../_components/custom/Navbar";
+import Navbar from "../_components/custom/Header";
 
 const TransactionPage = async () => {
   const transactions = await db.transaction.findMany({});

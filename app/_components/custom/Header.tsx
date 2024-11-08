@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const Navbar = () => {
+const Header = () => {
   const pathname = usePathname();
 
   return (
@@ -34,4 +34,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Header;

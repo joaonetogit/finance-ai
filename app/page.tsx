@@ -1,4 +1,4 @@
-import Navbar from "./_components/custom/Navbar";
+import Navbar from "./_components/custom/Header";
 
 function Home() {
   return <Navbar />;
