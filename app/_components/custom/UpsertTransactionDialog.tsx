@@ -46,22 +46,26 @@ import { UpsertTransaction } from "@/app/_actions/UpsertTransaction";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, {
-    message: "Nome é obrigatório",
+    message: "O nome é obrigatório.",
   }),
-  amount: z.number().positive({
-    message: "Valor é obrigatório",
-  }),
+  amount: z
+    .number({
+      required_error: "O valor é obrigatório.",
+    })
+    .positive({
+      message: "O valor deve ser positivo.",
+    }),
   type: z.nativeEnum(TransactionType, {
-    message: "Tipo é obrigatório",
+    required_error: "O tipo é obrigatório.",
   }),
   category: z.nativeEnum(TransactionCategory, {
-    message: "Categoria é obrigatória",
+    required_error: "A categoria é obrigatória.",
   }),
   paymentMethod: z.nativeEnum(TransactionPaymentMethod, {
-    message: "Método de Pagamento obrigatório",
+    required_error: "O método de pagamento é obrigatório.",
   }),
   date: z.date({
-    message: "Data é obrigatória",
+    required_error: "A data é obrigatória.",
   }),
 });
 
@@ -74,15 +78,6 @@ interface UpsertTransactionDialogProps {
   transactionId?: string;
 }
 
-const initialValues = {
-  amount: 100,
-  category: TransactionCategory.FOOD,
-  date: new Date(),
-  name: "",
-  paymentMethod: TransactionPaymentMethod.CASH,
-  type: TransactionType.EXPENSE,
-};
-
 const UpsertTransactionDialog = ({
   isOpen,
   setIsOpen,
@@ -91,10 +86,22 @@ const UpsertTransactionDialog = ({
 }: UpsertTransactionDialogProps) => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
-    defaultValues: defaultValues || initialValues,
+    defaultValues: defaultValues
+      ? {
+          ...defaultValues,
+          date: defaultValues.date && new Date(defaultValues.date),
+        }
+      : {
+          amount: 100,
+          category: TransactionCategory.FOOD,
+          date: new Date(),
+          name: "",
+          paymentMethod: TransactionPaymentMethod.CASH,
+          type: TransactionType.EXPENSE,
+        },
   });
 
-  const isUpdate = !!transactionId;
+  const isUpdate = Boolean(transactionId);
 
   const onSubmit = async (values: FormSchema) => {
     try {
@@ -119,7 +126,7 @@ const UpsertTransactionDialog = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            {isUpdate ? "Editar" : "Adicionar"} transação
+            {isUpdate ? "Atualizar" : "Criar"} transação
           </DialogTitle>
           <DialogDescription>Insira as informações abaixo</DialogDescription>
         </DialogHeader>
@@ -246,7 +253,7 @@ const UpsertTransactionDialog = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Data</FormLabel>
-                  <DatePicker onChange={field.onChange} value={field.value} />
+                  <DatePicker value={field.value} onChange={field.onChange} />
                   <FormMessage />
                 </FormItem>
               )}
