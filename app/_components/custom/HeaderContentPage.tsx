@@ -1,8 +1,6 @@
-interface HeaderContentPageProps {
-  children: React.ReactNode;
-}
+import { ChildrenProps } from "@/app/_types/base";
 
-export const HeaderContentPage = ({ children }: HeaderContentPageProps) => {
+export const HeaderContentPage = ({ children }: ChildrenProps) => {
   return (
     <div className="flex w-full items-center justify-between">{children}</div>
   );

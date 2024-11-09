@@ -1,6 +1,7 @@
 import { AddTransactionButton } from "@/app/_components/custom/AddTransactionButton";
 import { Card, CardContent, CardHeader } from "@/app/_components/ui/Card";
-import { cn, currencyFormat } from "@/app/_lib/utils";
+import { currencyFormat } from "@/app/_lib/format";
+import { cn } from "@/app/_lib/utils";
 
 interface SummaryCardProps {
   icon: React.ReactNode;

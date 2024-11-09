@@ -10,7 +10,7 @@ import {
 import { Button } from "@/app/_components/ui/Button";
 import { TrashIcon } from "lucide-react";
 import { EditTransactionButton } from "@/app/_components/custom/EditTransactionButton";
-import { currencyFormat, dateFormat } from "@/app/_lib/utils";
+import { dateFormat, currencyFormat } from "@/app/_lib/format";
 
 export const transationColumns: ColumnDef<Transaction>[] = [
   {
