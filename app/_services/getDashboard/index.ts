@@ -1,8 +1,12 @@
 import { TransactionType } from "@prisma/client";
 import { db } from "../../_lib/prisma";
-import { TotalExpensePerCategory, TransactionPercentagePerType } from "./types";
-import { getAggregate } from "@/app/_lib/data";
-import { calcTotalPercentage } from "@/app/_lib/format";
+import {
+  LastTransaction,
+  TotalExpensePerCategory,
+  TransactionPercentagePerType,
+} from "./types";
+import { calcTotalPercentage } from "@/app/_utils/format";
+import { getAggregate } from "@/app/_utils/data";
 
 export interface GetDashboardReturn {
   depositsTotal: number;
@@ -11,6 +15,7 @@ export interface GetDashboardReturn {
   balanceTotal: number;
   typesPercentage: TransactionPercentagePerType;
   totalExpensePerCategory: TotalExpensePerCategory[];
+  lastTransactions: LastTransaction[];
 }
 
 interface GetDashboardParams {
@@ -76,6 +81,17 @@ export async function getDashboard({
     ),
   }));
 
+  const lastTransactions = await db.transaction.findMany({
+    where,
+    orderBy: { date: "desc" },
+    take: 15,
+  });
+
+  const lastTransactionsFormatted = lastTransactions.map((transaction) => ({
+    ...transaction,
+    amount: Number(transaction.amount),
+  }));
+
   return {
     depositsTotal,
     investmentsTotal,
@@ -83,5 +99,6 @@ export async function getDashboard({
     balanceTotal,
     typesPercentage,
     totalExpensePerCategory,
+    lastTransactions: lastTransactionsFormatted,
   };
 }

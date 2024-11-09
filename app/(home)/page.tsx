@@ -7,9 +7,9 @@ import { GridSummaryCards } from "./_components/GridSummaryCards";
 import { TimeSelect } from "./_components/TimeSelect";
 import { isMatch } from "date-fns";
 import { TransactionPieChart } from "./_components/TransactionPieChart";
-import { GridContent } from "./_components/GridContent";
 import { getDashboard } from "../_services/getDashboard";
 import { ExpensesPerCategory } from "./_components/ExpensesPerCategory";
+import { LastTransactions } from "./_components/LastTransactions";
 
 interface HomeProps {
   searchParams: { month: string };
@@ -32,15 +32,20 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
           <TimeSelect />
         </HeaderContentPage>
 
-        <GridContent>
-          <GridSummaryCards {...dashboardValues} />
-          <div className="grid grid-cols-3 grid-rows-1 gap-6">
-            <TransactionPieChart {...dashboardValues} />
-            <ExpensesPerCategory
-              expensesPerCategory={dashboardValues.totalExpensePerCategory}
-            />
+        <div className="grid grid-cols-[2fr,1fr] gap-6">
+          <div className="space-y-6">
+            <GridSummaryCards {...dashboardValues} />
+            <div className="grid grid-cols-3 grid-rows-1 gap-6">
+              <TransactionPieChart {...dashboardValues} />
+              <ExpensesPerCategory
+                expensesPerCategory={dashboardValues.totalExpensePerCategory}
+              />
+            </div>
           </div>
-        </GridContent>
+          <LastTransactions
+            lastTransactions={dashboardValues.lastTransactions}
+          />
+        </div>
       </ContainerPage>
     </>
   );

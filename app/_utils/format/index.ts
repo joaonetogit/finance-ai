@@ -5,10 +5,13 @@ export function currencyFormat(value: number) {
   }).format(value);
 }
 
-export function dateFormat(date: string | Date) {
+export function dateFormat(
+  date: string | Date,
+  monthType: "long" | "short" = "long",
+) {
   return new Date(date).toLocaleDateString("pt-BR", {
     day: "2-digit",
-    month: "long",
+    month: monthType,
     year: "numeric",
   });
 }

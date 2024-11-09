@@ -1,5 +1,5 @@
+import { db } from "@/app/_lib/prisma";
 import { TransactionType } from "@prisma/client";
-import { db } from "../prisma";
 
 export async function getAggregate(
   transactioType: TransactionType,

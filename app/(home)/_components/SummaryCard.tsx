@@ -1,6 +1,6 @@
 import { AddTransactionButton } from "@/app/_components/custom/AddTransactionButton";
 import { Card, CardContent, CardHeader } from "@/app/_components/ui/Card";
-import { currencyFormat } from "@/app/_lib/format";
+import { currencyFormat } from "@/app/_utils/format";
 import { cn } from "@/app/_lib/utils";
 
 interface SummaryCardProps {

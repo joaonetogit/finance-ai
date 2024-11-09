@@ -13,7 +13,7 @@ import { TrendingUpIcon, TrendingDownIcon, PiggyBankIcon } from "lucide-react";
 
 import { Pie, PieChart } from "recharts";
 import { PercentageItem } from "./PercentageItem";
-import { percentageFormat } from "@/app/_lib/format";
+import { percentageFormat } from "@/app/_utils/format";
 import { chartConfig } from "@/app/_constants/chartConfig";
 
 interface TransactionPieChartProps extends TransactionSummaryProps {

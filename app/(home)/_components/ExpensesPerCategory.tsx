@@ -2,9 +2,8 @@ import { CardContent, CardHeader, CardTitle } from "@/app/_components/ui/Card";
 import { Progress } from "@/app/_components/ui/Progress";
 import { ScrollArea } from "@/app/_components/ui/ScrollArea";
 import { TRANSACTION_CATEGORY_LABELS } from "@/app/_constants/transactions";
-import { percentageFormat } from "@/app/_lib/format";
+import { percentageFormat } from "@/app/_utils/format";
 import { TotalExpensePerCategory } from "@/app/_services/getDashboard/types";
-import React from "react";
 
 interface ExpensesPerCategoryProps {
   expensesPerCategory: TotalExpensePerCategory[];
