@@ -2,15 +2,10 @@ import Image from "next/image";
 import { Button } from "../_components/ui/Button";
 import { LogInIcon } from "lucide-react";
 import { SignInButton } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
+import { useRedirect } from "../_hooks/useRedirect";
 
-const LoginPage = async () => {
-  const { userId } = await auth();
-
-  if (userId) {
-    redirect("/");
-  }
+const LoginPage = () => {
+  useRedirect("/dashboard");
 
   return (
     <div className="grid h-full grid-cols-2">

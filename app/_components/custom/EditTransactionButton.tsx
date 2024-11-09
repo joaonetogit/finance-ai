@@ -3,14 +3,16 @@
 import { useState, useCallback } from "react";
 import { PencilIcon } from "lucide-react";
 import { Button } from "../ui/Button";
-import UpsertTransactionDialog from "./UpsertTransactionDialog";
+import { UpsertTransactionDialog } from "./UpsertTransactionDialog";
 import { Transaction } from "@prisma/client";
 
 interface EditTransactionButtonProps {
   transaction: Transaction;
 }
 
-const EditTransactionButton = ({ transaction }: EditTransactionButtonProps) => {
+export const EditTransactionButton = ({
+  transaction,
+}: EditTransactionButtonProps) => {
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
   const handleDialogIsOpen = useCallback(() => {
@@ -39,5 +41,3 @@ const EditTransactionButton = ({ transaction }: EditTransactionButtonProps) => {
     </>
   );
 };
-
-export default EditTransactionButton;

@@ -5,9 +5,9 @@ import { ArrowDownUpIcon } from "lucide-react";
 
 import { Button } from "../ui/Button";
 
-import UpsertTransactionDialog from "./UpsertTransactionDialog";
+import { UpsertTransactionDialog } from "./UpsertTransactionDialog";
 
-const AddTransactionButton = () => {
+export const AddTransactionButton = () => {
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
   return (
@@ -26,5 +26,3 @@ const AddTransactionButton = () => {
     </>
   );
 };
-
-export default AddTransactionButton;

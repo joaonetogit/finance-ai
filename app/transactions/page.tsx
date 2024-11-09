@@ -1,27 +1,24 @@
-import { db } from "../_lib/prisma";
 import { DataTable } from "../_components/ui/DataTable";
+import { AddTransactionButton } from "../_components/custom/AddTransactionButton";
+import { Header } from "../_components/custom/Header";
+import { HeaderContentPage } from "../_components/custom/HeaderContentPage";
+import { TitlePage } from "../_components/custom/TittlePage";
+
+import { getTransactionsPage } from "../_services/transactionsPage";
+
 import { transationColumns } from "./_columns";
-import AddTransactionButton from "../_components/custom/AddTransactionButton";
-import Navbar from "../_components/custom/Header";
-import { auth } from "@clerk/nextjs/server";
 
 const TransactionPage = async () => {
-  const { userId } = await auth();
-
-  const transactions = await db.transaction.findMany({
-    where: {
-      userId: userId!,
-    },
-  });
+  const { transactions } = await getTransactionsPage();
 
   return (
     <>
-      <Navbar />
+      <Header />
       <div className="space-y-6 p-6">
-        <div className="flex w-full items-center justify-between">
-          <h1 className="text-2xl font-bold">Transactions</h1>
+        <HeaderContentPage>
+          <TitlePage>Transactions</TitlePage>
           <AddTransactionButton />
-        </div>
+        </HeaderContentPage>
         <DataTable
           columns={transationColumns}
           data={JSON.parse(JSON.stringify(transactions))}

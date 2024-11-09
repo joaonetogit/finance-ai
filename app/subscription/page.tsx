@@ -1,9 +1,9 @@
-import Navbar from "../_components/custom/Header";
+import { Header } from "../_components/custom/Header";
 
 const SubscriptionPage = () => {
   return (
     <>
-      <Navbar />
+      <Header />
       <h1>SubscriptionPage</h1>
     </>
   );

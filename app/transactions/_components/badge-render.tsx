@@ -5,7 +5,8 @@ import { CircleIcon } from "lucide-react";
 interface TransactionBadgeRenderProps {
   transaction: Transaction;
 }
-const TransactionBadgeRender = ({
+
+export const TransactionBadgeRender = ({
   transaction,
 }: TransactionBadgeRenderProps) => {
   if (transaction.type === TransactionType.DEPOSIT) {
@@ -31,5 +32,3 @@ const TransactionBadgeRender = ({
     </Badge>
   );
 };
-
-export default TransactionBadgeRender;

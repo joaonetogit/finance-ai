@@ -4,7 +4,7 @@ import { NAV_MENU_ITEMS } from "@/app/_constants/navMenuItems";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const NavMenu = () => {
+export const NavMenu = () => {
   const pathname = usePathname();
 
   return (
@@ -25,5 +25,3 @@ const NavMenu = () => {
     </nav>
   );
 };
-
-export default NavMenu;

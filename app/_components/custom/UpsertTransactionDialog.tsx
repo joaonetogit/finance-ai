@@ -78,7 +78,7 @@ interface UpsertTransactionDialogProps {
   transactionId?: string;
 }
 
-const UpsertTransactionDialog = ({
+export const UpsertTransactionDialog = ({
   isOpen,
   setIsOpen,
   defaultValues,
@@ -274,5 +274,3 @@ const UpsertTransactionDialog = ({
     </Dialog>
   );
 };
-
-export default UpsertTransactionDialog;

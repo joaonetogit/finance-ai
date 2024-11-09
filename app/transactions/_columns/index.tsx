@@ -2,14 +2,14 @@
 
 import { Transaction } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
-import TransactionBadgeRender from "../_components/badge-render";
+import { TransactionBadgeRender } from "../_components/badge-render";
 import {
   TRANSACTION_CATEGORY_LABELS,
   TRANSACTION_PAYMENT_METHOD_LABELS,
 } from "@/app/_constants/transactions";
 import { Button } from "@/app/_components/ui/Button";
 import { TrashIcon } from "lucide-react";
-import EditTransactionButton from "@/app/_components/custom/EditTransactionButton";
+import { EditTransactionButton } from "@/app/_components/custom/EditTransactionButton";
 
 export const transationColumns: ColumnDef<Transaction>[] = [
   {
