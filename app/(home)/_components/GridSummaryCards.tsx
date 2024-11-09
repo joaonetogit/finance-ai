@@ -7,12 +7,16 @@ import {
 import { SummaryCard } from "./SummaryCard";
 import { getTransactionSummary } from "@/app/_services/transactionSummary";
 
-export const GridSummaryCards = async () => {
+interface GridSummaryCardsProps {
+  month: string;
+}
+
+export const GridSummaryCards = async ({ month }: GridSummaryCardsProps) => {
   const SIZE_ICON_LARGE = 18;
   const SIZE_ICON_SMALL = 14;
 
   const { balanceTotal, depositsTotal, expensesTotal, investmentsTotal } =
-    await getTransactionSummary();
+    await getTransactionSummary({ month });
 
   return (
     <div className="space-y-6">

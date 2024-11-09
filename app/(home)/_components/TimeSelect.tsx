@@ -1,44 +1,53 @@
+"use client";
+
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
+  SelectValue,
 } from "@/app/_components/ui/Select";
-import { ArrowDownIcon } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const MONTH_OPTIONS = [
-  { value: 1, label: "Janeiro" },
-  { value: 2, label: "Fevereiro" },
-  { value: 3, label: "Março" },
-  { value: 4, label: "Abril" },
-  { value: 5, label: "Maio" },
-  { value: 6, label: "Junho" },
-  { value: 7, label: "Julho" },
-  { value: 8, label: "Agosto" },
-  { value: 9, label: "Setembro" },
-  { value: 10, label: "Outubro" },
-  { value: 11, label: "Novembro" },
-  { value: 12, label: "Dezembro" },
+  { value: "01", label: "Janeiro" },
+  { value: "02", label: "Fevereiro" },
+  { value: "03", label: "Março" },
+  { value: "04", label: "Abril" },
+  { value: "05", label: "Maio" },
+  { value: "06", label: "Junho" },
+  { value: "07", label: "Julho" },
+  { value: "08", label: "Agosto" },
+  { value: "09", label: "Setembro" },
+  { value: "10", label: "Outubro" },
+  { value: "11", label: "Novembro" },
+  { value: "12", label: "Dezembro" },
 ] as const;
 
 export const TimeSelect = () => {
+  const { push } = useRouter();
+  const searchParams = useSearchParams();
+  const month = searchParams.get("month");
+
+  const handleMonthChange = (month: string) => {
+    push(`/?month=${month}`);
+  };
+
   return (
-    <div>
-      <Select>
-        <SelectTrigger>
-          <div className="flex items-center gap-2">
-            <span>Selecione o mês</span>
-            <ArrowDownIcon />
-          </div>
-        </SelectTrigger>
-        <SelectContent>
-          {MONTH_OPTIONS.map((option) => (
-            <SelectItem key={option.value} value={String(option.value)}>
-              {option.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    </div>
+    <Select
+      onValueChange={(value) => handleMonthChange(value)}
+      defaultValue={month ?? "01"}
+    >
+      <SelectTrigger className="w-[150px] rounded-full">
+        <SelectValue placeholder="Mês" />
+      </SelectTrigger>
+      <SelectContent>
+        {MONTH_OPTIONS.map((option) => (
+          <SelectItem key={option.value} value={String(option.value)}>
+            {option.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 };

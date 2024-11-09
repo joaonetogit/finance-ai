@@ -10,6 +10,7 @@ import {
 import { Button } from "@/app/_components/ui/Button";
 import { TrashIcon } from "lucide-react";
 import { EditTransactionButton } from "@/app/_components/custom/EditTransactionButton";
+import { currencyFormat, dateFormat } from "@/app/_lib/utils";
 
 export const transationColumns: ColumnDef<Transaction>[] = [
   {
@@ -38,21 +39,14 @@ export const transationColumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: "date",
     header: "Data",
-    cell: ({ row: { original: transaction } }) =>
-      new Date(transaction.date).toLocaleDateString("pt-BR", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      }),
+    cell: ({ row: { original: transaction } }) => dateFormat(transaction.date),
   },
   {
     accessorKey: "amount",
     header: "Valor",
-    cell: ({ row: { original: transaction } }) =>
-      new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      }).format(Number(transaction.amount)),
+    cell: ({ row: { original: transaction } }) => {
+      currencyFormat(Number(transaction.amount));
+    },
   },
   {
     accessorKey: "actions",

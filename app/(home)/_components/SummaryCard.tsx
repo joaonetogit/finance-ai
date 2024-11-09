@@ -1,6 +1,6 @@
 import { AddTransactionButton } from "@/app/_components/custom/AddTransactionButton";
 import { Card, CardContent, CardHeader } from "@/app/_components/ui/Card";
-import { cn } from "@/app/_lib/utils";
+import { cn, currencyFormat } from "@/app/_lib/utils";
 
 interface SummaryCardProps {
   icon: React.ReactNode;
@@ -36,10 +36,7 @@ export const SummaryCard = ({
       </CardHeader>
       <CardContent className="flex justify-between">
         <p className={cn("font-bold", styles.amount)}>
-          {amount.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-          })}
+          {currencyFormat(amount)}
         </p>
         {size === "large" && <AddTransactionButton />}
       </CardContent>

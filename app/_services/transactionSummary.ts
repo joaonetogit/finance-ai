@@ -7,11 +7,24 @@ export interface TransactionSummary {
   balanceTotal: number;
 }
 
-export async function getTransactionSummary(): Promise<TransactionSummary> {
+interface GetTransactionSummaryParams {
+  month: string;
+}
+
+export async function getTransactionSummary({
+  month,
+}: GetTransactionSummaryParams): Promise<TransactionSummary> {
+  const where = {
+    date: {
+      gte: new Date(`2024-${month}-01`),
+      lt: new Date(`2024-${month}-31`),
+    },
+  };
+
   const depositsTotal = Number(
     (
       await db.transaction.aggregate({
-        where: { type: "DEPOSIT" },
+        where: { ...where, type: "DEPOSIT" },
         _sum: { amount: true },
       })
     )?._sum.amount,
@@ -20,7 +33,7 @@ export async function getTransactionSummary(): Promise<TransactionSummary> {
   const investmentsTotal = Number(
     (
       await db.transaction.aggregate({
-        where: { type: "INVESTMENT" },
+        where: { ...where, type: "INVESTMENT" },
         _sum: { amount: true },
       })
     )?._sum.amount,
@@ -29,7 +42,7 @@ export async function getTransactionSummary(): Promise<TransactionSummary> {
   const expensesTotal = Number(
     (
       await db.transaction.aggregate({
-        where: { type: "EXPENSE" },
+        where: { ...where, type: "EXPENSE" },
         _sum: { amount: true },
       })
     )?._sum.amount,
