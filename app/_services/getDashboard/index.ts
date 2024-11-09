@@ -1,6 +1,6 @@
 import { TransactionType } from "@prisma/client";
 import { db } from "../../_lib/prisma";
-import { TransactionPercentagePerType } from "./types";
+import { TotalExpensePerCategory, TransactionPercentagePerType } from "./types";
 import { getAggregate } from "@/app/_lib/data";
 import { calcTotalPercentage } from "@/app/_lib/format";
 
@@ -10,6 +10,7 @@ export interface GetDashboardReturn {
   expensesTotal: number;
   balanceTotal: number;
   typesPercentage: TransactionPercentagePerType;
+  totalExpensePerCategory: TotalExpensePerCategory[];
 }
 
 interface GetDashboardParams {
@@ -56,11 +57,31 @@ export async function getDashboard({
     ),
   };
 
+  const totalExpensePerCategory: TotalExpensePerCategory[] = (
+    await db.transaction.groupBy({
+      by: ["category"],
+      where: {
+        ...where,
+        type: TransactionType.EXPENSE,
+      },
+      _sum: {
+        amount: true,
+      },
+    })
+  ).map((category) => ({
+    category: category.category,
+    totalAmount: Number(category._sum.amount),
+    percentageOfTotal: Number(
+      calcTotalPercentage(Number(category._sum.amount), Number(expensesTotal)),
+    ),
+  }));
+
   return {
     depositsTotal,
     investmentsTotal,
     expensesTotal,
     balanceTotal,
     typesPercentage,
+    totalExpensePerCategory,
   };
 }

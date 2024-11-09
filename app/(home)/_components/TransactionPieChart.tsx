@@ -2,7 +2,6 @@
 
 import { Card, CardContent } from "@/app/_components/ui/Card";
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
@@ -15,25 +14,11 @@ import { TrendingUpIcon, TrendingDownIcon, PiggyBankIcon } from "lucide-react";
 import { Pie, PieChart } from "recharts";
 import { PercentageItem } from "./PercentageItem";
 import { percentageFormat } from "@/app/_lib/format";
+import { chartConfig } from "@/app/_constants/chartConfig";
 
 interface TransactionPieChartProps extends TransactionSummaryProps {
   typesPercentage: TransactionPercentagePerType;
 }
-
-const chartConfig = {
-  [TransactionType.INVESTMENT]: {
-    label: "Investido",
-    color: "#FFFFFF",
-  },
-  [TransactionType.DEPOSIT]: {
-    label: "Receita",
-    color: "#55B02E",
-  },
-  [TransactionType.EXPENSE]: {
-    label: "Despesas",
-    color: "#E93030",
-  },
-} satisfies ChartConfig;
 
 export const TransactionPieChart = ({
   investmentsTotal,
