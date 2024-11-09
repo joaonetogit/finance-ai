@@ -29,7 +29,9 @@ export const SummaryCard = ({
   const styles = sizeStyles[size];
 
   return (
-    <Card>
+    <Card
+      className={size === "large" || title === "Investido" ? "bg-white/5" : ""}
+    >
       <CardHeader className="flex-row items-center gap-4">
         {icon}
         <p className={styles.title}>{title}</p>

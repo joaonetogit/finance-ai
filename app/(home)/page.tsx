@@ -26,7 +26,9 @@ function Home({ searchParams: { month } }: HomeProps) {
           <TimeSelect />
         </HeaderContentPage>
 
-        <GridSummaryCards month={month} />
+        <div className="grid grid-cols-[2fr,1fr]">
+          <GridSummaryCards month={month} />
+        </div>
       </ContainerPage>
     </>
   );
