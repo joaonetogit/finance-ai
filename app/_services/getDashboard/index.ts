@@ -7,6 +7,7 @@ import {
 } from "./types";
 import { calcTotalPercentage } from "@/app/_utils/format";
 import { getAggregate } from "@/app/_utils/data";
+import { auth } from "@clerk/nextjs/server";
 
 export interface GetDashboardReturn {
   depositsTotal: number;
@@ -25,7 +26,11 @@ interface GetDashboardParams {
 export async function getDashboard({
   month,
 }: GetDashboardParams): Promise<GetDashboardReturn> {
+  const { userId } = await auth();
+  const user = userId!;
+
   const where = {
+    userId: user,
     date: {
       gte: new Date(`2024-${month}-01`),
       lt: new Date(`2024-${month}-31`),
