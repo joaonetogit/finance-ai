@@ -7,6 +7,7 @@ import { TitlePage } from "../_components/custom/TittlePage";
 import { getTransactionsPage } from "../_services/transactionsPage";
 
 import { transationColumns } from "./_columns";
+import { ScrollArea } from "../_components/ui/ScrollArea";
 
 const TransactionPage = async () => {
   const { transactions } = await getTransactionsPage();
@@ -14,15 +15,17 @@ const TransactionPage = async () => {
   return (
     <>
       <Header />
-      <div className="space-y-6 p-6">
+      <div className="space-y-6 overflow-hidden p-6">
         <HeaderContentPage>
           <TitlePage>Transactions</TitlePage>
           <AddTransactionButton />
         </HeaderContentPage>
-        <DataTable
-          columns={transationColumns}
-          data={JSON.parse(JSON.stringify(transactions))}
-        />
+        <ScrollArea>
+          <DataTable
+            columns={transationColumns}
+            data={JSON.parse(JSON.stringify(transactions))}
+          />
+        </ScrollArea>
       </div>
     </>
   );

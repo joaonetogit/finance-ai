@@ -26,16 +26,16 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
   return (
     <>
       <Header />
-      <ContainerPage className="space-y-6">
+      <ContainerPage className="flex flex-col space-y-6 overflow-hidden">
         <HeaderContentPage>
           <TitlePage>Dashboard</TitlePage>
           <TimeSelect />
         </HeaderContentPage>
 
-        <div className="grid grid-cols-[2fr,1fr] gap-6">
-          <div className="space-y-6">
+        <div className="grid h-full grid-cols-[2fr,1fr] gap-6 overflow-hidden">
+          <div className="flex flex-col gap-6 overflow-hidden">
             <GridSummaryCards {...dashboardValues} />
-            <div className="grid grid-cols-3 grid-rows-1 gap-6">
+            <div className="grid h-full grid-cols-3 grid-rows-1 gap-6 overflow-hidden">
               <TransactionPieChart {...dashboardValues} />
               <ExpensesPerCategory
                 expensesPerCategory={dashboardValues.totalExpensePerCategory}

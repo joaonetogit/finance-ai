@@ -6,5 +6,7 @@ interface ContainerPageProps {
 }
 
 export const ContainerPage = ({ children, className }: ContainerPageProps) => {
-  return <div className={cn("container p-6", className)}>{children}</div>;
+  return (
+    <div className={cn("container mx-auto p-6", className)}>{children}</div>
+  );
 };
